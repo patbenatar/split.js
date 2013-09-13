@@ -13,9 +13,10 @@
       if ($.cookie(name) || !(groups != null)) {
         group = $.cookie(name);
       } else {
-        group = this.selectRandom(groups);
+        group = this.util.selectRandom(groups);
         $.cookie(name, group);
       }
+      group = this.util.cast(group);
       if (callback != null) {
         return callback(group);
       } else {
@@ -25,8 +26,22 @@
     clear: function(name) {
       return $.removeCookie(name);
     },
-    selectRandom: function(groups) {
-      return groups[Math.floor(Math.random() * groups.length)];
+    util: {
+      selectRandom: function(groups) {
+        return groups[Math.floor(Math.random() * groups.length)];
+      },
+      cast: function(string) {
+        var number;
+        if (number = parseInt(string)) {
+          return number;
+        } else if (string === "true") {
+          return true;
+        } else if (string === "false") {
+          return false;
+        } else {
+          return string;
+        }
+      }
     }
   };
 

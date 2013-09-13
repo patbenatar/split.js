@@ -12,12 +12,25 @@ window.Split = {
     if $.cookie(name) || !groups?
       group = $.cookie name
     else
-      group = @selectRandom(groups)
+      group = @util.selectRandom(groups)
       $.cookie name, group
+
+    group = @util.cast(group)
 
     if callback? then callback(group) else group
 
   clear: (name) -> $.removeCookie name
 
-  selectRandom: (groups) -> groups[Math.floor(Math.random() * groups.length)]
+  util:
+    selectRandom: (groups) -> groups[Math.floor(Math.random() * groups.length)]
+
+    cast: (string) ->
+      if number = parseInt(string)
+        number
+      else if string == "true"
+        true
+      else if string == "false"
+        false
+      else
+        string
 }

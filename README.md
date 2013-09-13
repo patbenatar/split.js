@@ -23,13 +23,28 @@ Split.test("experiment_name", ["group_a", "group_b"], function (group) {
 ```
 
 ### Simple decision making
+
 ```
 group = Split.test("experiment_name", ["group_a", "group_b"])
 // => "group_a"
 ```
 
 ### Recall previous decisions
+
 ```
 group = Split.test("experiment_name")
 // => "group_a"
+```
+
+### Typecasting
+
+Split will attempt to typecast cookie values into numbers and booleans so you
+can split test with those types:
+
+```javascript
+Split.test("is_awesome", [true, false])
+=> true
+
+Split.test("number_of_buttons", [1, 2, 3, 4])
+=> 3
 ```
