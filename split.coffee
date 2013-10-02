@@ -13,7 +13,7 @@ window.Split = {
       group = $.cookie name
     else
       group = @util.selectRandom(groups)
-      $.cookie name, group
+      $.cookie name, group, expires: 365
 
     group = @util.cast(group)
 

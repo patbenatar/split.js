@@ -14,7 +14,9 @@
         group = $.cookie(name);
       } else {
         group = this.util.selectRandom(groups);
-        $.cookie(name, group);
+        $.cookie(name, group, {
+          expires: 365
+        });
       }
       group = this.util.cast(group);
       if (callback != null) {
